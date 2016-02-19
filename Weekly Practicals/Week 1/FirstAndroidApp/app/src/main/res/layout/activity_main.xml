@@ -13,22 +13,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Goodbye World!"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:id="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/application_author"
+        android:id="@+id/authorName"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dog"
+        android:background="@drawable/alaskan_malamute"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
+        android:id="@+id/dogBreed"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/authorName"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:id="@+id/imageView"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp"
-        android:background="#d82b2b" />
 </RelativeLayout>
