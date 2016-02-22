@@ -22,13 +22,12 @@
         android:text="@string/application_author"
         android:id="@+id/authorName"
         android:layout_marginTop="80dp"
-        android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dog"
+        android:id="@+id/dogPic"
         android:background="@drawable/alaskan_malamute"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
