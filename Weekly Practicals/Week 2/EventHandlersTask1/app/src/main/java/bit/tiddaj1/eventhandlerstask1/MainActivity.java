@@ -15,11 +15,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Binding button to the handler
         Button button = (Button) findViewById(R.id.btn);
-        buttonShortClickHandler handler = new buttonShortClickHandler();
-        button.setOnClickListener(handler);
+
+        buttonClickHandler clickHandler = new buttonClickHandler();
+        buttonLongClickHandler longClickHandler = new buttonLongClickHandler();
+
+        button.setOnClickListener(clickHandler);
+        button.setOnLongClickListener(longClickHandler);
     }
 
-    public class buttonShortClickHandler implements View.OnClickListener {
+    public class buttonClickHandler implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onLongClick(View v) {
+            Toast.makeText(MainActivity.this, "Full click", Toast.LENGTH_LONG).show();
             return false;
         }
     }
