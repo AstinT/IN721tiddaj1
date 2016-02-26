@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MusicSchoolRadioBtn</string>
+    <string name="instrument_to_play">Which instrument do you want to learn to play?</string>
+</resources>
