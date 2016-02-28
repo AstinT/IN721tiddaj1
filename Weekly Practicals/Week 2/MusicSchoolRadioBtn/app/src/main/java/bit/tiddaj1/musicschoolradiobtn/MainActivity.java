@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,27 +15,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RadioGroup instrumentGroup = (RadioGroup) findViewById(R.id.rgInstruments);
-        instrumentGroup.setOnCheckedChangeListener(new radioGroupListener());
-
-        Button confirmButton = (Button) findViewById(R.id.btnConfirm);
-        confirmButton.setOnClickListener(new buttonListener());
+        //getting button id
+        Button btnConfirm = (Button) findViewById(R.id.btnConfirm);
+        //setting onClickListener to btnConfirm
+        btnConfirm.setOnClickListener(new buttonListener());
     }
 
-    public class radioGroupListener implements RadioGroup.OnCheckedChangeListener {
-
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            RadioButton chosenButton = (RadioButton) findViewById(checkedId);
-            String chosenInstrument = chosenButton.getText().toString();
-        }
-    }
-
+    //Button listener class
     public class buttonListener implements Button.OnClickListener {
 
         @Override
+        //onClick method.
+        //Executes when button is clicked
         public void onClick(View v) {
+            //getting radio group id
+            RadioGroup rgInstruments = (RadioGroup) findViewById(R.id.rgInstruments);
+            //gets checked radiobutton that belongs to rgInstruments
+            int checkedId = rgInstruments.getCheckedRadioButtonId();
+            //Declaring a radioButton with the checkedId
+            RadioButton checkedRadiobtn = (RadioButton) findViewById(checkedId);
 
+            //Displaying what they have enrolled in
+            TextView tvEnrolled = (TextView) findViewById(R.id.tvEnrolled);
+            tvEnrolled.setText("You have enrolled for " + checkedRadiobtn.getText() + " lessons.");
         }
     }
 }
