@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MultipleActivities</string>
+    <string name="activityOneTitle">Activity 1</string>
+    <string name="changeActivityButtonTitle">Change activity</string>
+    <string name="activityTwoTitle">Activity 2</string>
+    <string name="activityThreeTitle">Activity 3</string>
+    <string name="openWebPageButtonTitle">Open webpage</string>
+    <string name="websiteAddress">http://oce.op.gg</string>
+</resources>
