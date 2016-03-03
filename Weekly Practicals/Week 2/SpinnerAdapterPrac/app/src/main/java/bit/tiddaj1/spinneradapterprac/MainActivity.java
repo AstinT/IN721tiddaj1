@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         //setting adapter to spinner
         monthsSpinner.setAdapter(monthsAdapter);
 
-        Button btnEnroll = (Button) findViewById(R.id.btnEnroll);
+        Button btnEnroll = (Button) findViewById(R.id.btnConfirm);
         btnEnroll.setOnClickListener(new buttonListener());
     }
 
