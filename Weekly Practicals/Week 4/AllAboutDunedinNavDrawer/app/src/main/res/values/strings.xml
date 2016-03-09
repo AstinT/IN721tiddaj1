@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AllAboutDunedinNavDrawer</string>
+    <string name="subScreenTitleServices">Services</string>
+    <string name="subScreenTitleFunThingsToDo">Fun Things To Do</string>
+    <string name="subScreenTitleDining">Dining</string>
+    <string name="subScreenTitleShopping">Shopping</string>
 </resources>
