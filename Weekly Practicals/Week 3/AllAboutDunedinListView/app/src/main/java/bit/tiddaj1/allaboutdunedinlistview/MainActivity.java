@@ -29,4 +29,34 @@ public class MainActivity extends AppCompatActivity {
 
         activitiesGroupListView.setAdapter(activitiesGroupAdapter);
     }
+
+    public class ActivitiesGroupNavListClickHandler implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> list, View view, int position, long id)
+        {
+            String clickedItem = (String) list.getItemAtPosition(position);
+            Intent goToIntent;
+
+            switch (clickedItem) {
+                case "Services":
+                    goToIntent = new Intent(MainActivity.this, Services.class);
+                    break;
+                case "Fun Things To Do":
+                    goToIntent = new Intent(MainActivity.this, FunThingsToDo.class);
+                    break;
+                case "Dining":
+                    goToIntent = new Intent(MainActivity.this, Dining.class);
+                    break;
+                case "Shopping":
+                    goToIntent = new Intent(MainActivity.this, Shopping.class);
+                    break;
+                default:
+                    goToIntent = null;
+            }
+
+            if (goToIntent != null)
+                startActivity(goToIntent);
+        }
+    }
 }
