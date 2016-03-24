@@ -5,4 +5,6 @@
     <string name="radioButtonDas">das</string>
     <string name="buttonSubmitQuestion">Submit</string>
     <string name="buttonWelcomeStart">Start</string>
+    <string name="resultsTitle">Results</string>
+    <string name="buttonStartOver">Start over</string>
 </resources>
