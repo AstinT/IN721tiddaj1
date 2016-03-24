@@ -34,17 +34,17 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/ivWelcomeImage"
         android:src="@drawable/german_flag"
-        android:layout_below="@+id/tvWelcomeTitle"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/tvStart"
+        android:text="@string/buttonWelcomeStart"
+        android:id="@+id/btnStart"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />

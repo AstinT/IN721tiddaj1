@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LanguageTrainer</string>
+    <string name="radioButtonDer">der</string>
+    <string name="radioButtonDie">die</string>
+    <string name="radioButtonDas">das</string>
+    <string name="buttonSubmitQuestion">Submit</string>
+    <string name="buttonWelcomeStart">Start</string>
 </resources>
