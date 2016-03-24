@@ -10,4 +10,8 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
     }
+
+    public void getDialogData(boolean data)
+    {
+    }
 }
