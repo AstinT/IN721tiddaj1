@@ -14,10 +14,15 @@ public class AlertBuilderFragment extends DialogFragment
         //new builder
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setTitle("Correct/Incorrect");
+        String title = getArguments().getString("data");
+        builder.setTitle(title);
         builder.setPositiveButton("Next Question", new ButtonHandler());
 
-        return builder.create();
+        AlertDialog alert = builder.create();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+
+        return alert;
     }
 
     //ButtonHandler for Dialog Fragment button
@@ -30,7 +35,7 @@ public class AlertBuilderFragment extends DialogFragment
             if(which == DialogInterface.BUTTON_POSITIVE)
             {
                 QuestionActivity myActivity = (QuestionActivity) getActivity();
-                myActivity.getDialogData(true);
+                myActivity.getDialogData();
             }
         }
     }
