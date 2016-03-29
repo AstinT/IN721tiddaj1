@@ -1,20 +1,22 @@
 package bit.tiddaj1.languagetrainer;
 
+import android.media.Image;
+
 public class Question
 {
     //Properties
     private String noun;
     private String article;
+    private int image;
 
-    public Question(String noun, String article)
+    public Question(String noun, String article, int image)
     {
         this.noun = noun;
         this.article = article;
+        this.image = image;
     }
 
     //Getters and setters
-    public String getNoun() { return noun; }
-    public void setNoun(String noun) { this.noun = noun; }
     public String getArticle() { return article; }
-    public void setArticle(String article) { this.article = article; }
+    public int getImage() { return image; }
 }
