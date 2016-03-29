@@ -24,7 +24,7 @@
         android:id="@+id/ivQuestionImage"
         android:layout_below="@+id/tvQuestionNumber"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp" />
+        android:layout_marginTop="40dp" />
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         android:layout_above="@+id/btnSubmitAnswer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="30dp">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -65,7 +65,8 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonSubmitQuestion"
         android:id="@+id/btnSubmitAnswer"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
