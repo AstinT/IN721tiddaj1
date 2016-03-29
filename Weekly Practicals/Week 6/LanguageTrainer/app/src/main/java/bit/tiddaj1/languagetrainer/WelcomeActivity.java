@@ -13,6 +13,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        //reference to btnStart
         Button btnStart = (Button) findViewById(R.id.btnStart);
         btnStart.setOnClickListener(new buttonListener());
     }
@@ -24,6 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //onClick method
         public void onClick(View v)
         {
+            //Go to QuestionActivity
             Intent goToQuestions = new Intent(WelcomeActivity.this, QuestionActivity.class);
             startActivity(goToQuestions);
         }

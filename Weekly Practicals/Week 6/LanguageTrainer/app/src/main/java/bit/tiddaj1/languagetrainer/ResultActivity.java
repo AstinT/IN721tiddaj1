@@ -16,6 +16,7 @@ public class ResultActivity extends AppCompatActivity {
 
         displayScore();
 
+        //Reference to btnStartOver
         Button btnStartOver = (Button) findViewById(R.id.btnStartOver);
         btnStartOver.setOnClickListener(new buttonListener());
     }
@@ -23,8 +24,10 @@ public class ResultActivity extends AppCompatActivity {
     public void displayScore()
     {
         TextView tvResult = (TextView) findViewById(R.id.tvResult);
+        //Gets score from Bundle
         Bundle extras = getIntent().getExtras();
         int score = extras.getInt("score");
+        //Set score
         tvResult.setText(score + " / 11");
     }
 
@@ -35,6 +38,7 @@ public class ResultActivity extends AppCompatActivity {
         //onClick method
         public void onClick(View v)
         {
+            //Go back to Welcome screen to start quiz again
             Intent goToWelcome = new Intent(ResultActivity.this, WelcomeActivity.class);
             startActivity(goToWelcome);
         }

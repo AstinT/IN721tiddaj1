@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    //Global variable
     int score;
     int currQuestionNum;
     Question currQuestion;
@@ -26,6 +27,7 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        //Reference to btnSubmitAnswer
         Button btnSubmit = (Button) findViewById(R.id.btnSubmitAnswer);
         btnSubmit.setOnClickListener(new buttonListener());
 
@@ -38,6 +40,7 @@ public class QuestionActivity extends AppCompatActivity {
         loadNextQuestion();
     }
 
+    //Loads questions into a list
     public void loadQuestionList()
     {
         questionList = new ArrayList<Question>();
@@ -56,6 +59,7 @@ public class QuestionActivity extends AppCompatActivity {
         questionList.add(new Question("Stuhl", "Der", R.drawable.der_stuhl));
     }
 
+    //Shuffle algorithm
     private void shuffleList()
     {
         Random rand = new Random();
@@ -72,6 +76,8 @@ public class QuestionActivity extends AppCompatActivity {
         }
     }
 
+    //Loads next question
+    //Sets image and question number
     public void loadNextQuestion()
     {
         currQuestion = questionList.get(currQuestionNum);
@@ -93,6 +99,8 @@ public class QuestionActivity extends AppCompatActivity {
         }
     }
 
+    //Checks if the selected radiobutton is the correct answer
+    //Returns a boolean
     public boolean checkAnswer()
     {
         RadioGroup rgArticles = (RadioGroup) findViewById(R.id.rgArticles);
@@ -105,11 +113,14 @@ public class QuestionActivity extends AppCompatActivity {
             return false;
     }
 
+    //Builds a DialogFragment and passes it a string correct or incorrect depending if the question
+    //was answered correctly
     public void buildAlertBuilderFragment(boolean result)
     {
         feedback = new AlertBuilderFragment();
         Bundle bundle = new Bundle();
 
+        //Puts a string into the bundle
         if(result)
         {
             bundle.putString("data", "Correct");
@@ -118,23 +129,30 @@ public class QuestionActivity extends AppCompatActivity {
         else
             bundle.putString("data", "Incorrect");
 
+        //Passes bundle
         feedback.setArguments(bundle);
         FragmentManager fm = getFragmentManager();
+        //Shows DialogFragment
         feedback.show(fm, "feedback");
     }
 
+    //Called when the Next Question button on the DialogFragment is clicked
     public void getDialogData()
     {
         feedback.dismiss();
+        //Increments so a new question will load
         currQuestionNum++;
 
+        //Shows a new question if currQuestionNum is less than list size
         if(currQuestionNum < questionList.size())
         {
             loadNextQuestion();
         }
+        //If all questions have been displayed show results
         else
         {
             Intent goToResults = new Intent(QuestionActivity.this, ResultActivity.class);
+            //Passes the score to the intent
             goToResults.putExtra("score", score);
             startActivity(goToResults);
         }

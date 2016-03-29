@@ -14,11 +14,14 @@ public class AlertBuilderFragment extends DialogFragment
         //new builder
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        //gets String from the bundle
         String title = getArguments().getString("data");
+        //sets the string as the title
         builder.setTitle(title);
         builder.setPositiveButton("Next Question", new ButtonHandler());
 
         AlertDialog alert = builder.create();
+        //Stops user canceling and clicking outside of DialogFragment
         alert.setCancelable(false);
         alert.setCanceledOnTouchOutside(false);
 

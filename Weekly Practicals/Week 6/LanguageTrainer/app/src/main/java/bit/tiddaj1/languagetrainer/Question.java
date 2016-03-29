@@ -1,7 +1,5 @@
 package bit.tiddaj1.languagetrainer;
 
-import android.media.Image;
-
 public class Question
 {
     //Properties
@@ -9,6 +7,7 @@ public class Question
     private String article;
     private int image;
 
+    //Constructor
     public Question(String noun, String article, int image)
     {
         this.noun = noun;
