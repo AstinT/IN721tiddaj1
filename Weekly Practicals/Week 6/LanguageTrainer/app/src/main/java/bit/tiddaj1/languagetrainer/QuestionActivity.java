@@ -157,4 +157,8 @@ public class QuestionActivity extends AppCompatActivity {
             startActivity(goToResults);
         }
     }
+
+    //Overrides method, and does nothing...
+    @Override
+    public void onBackPressed() { }
 }

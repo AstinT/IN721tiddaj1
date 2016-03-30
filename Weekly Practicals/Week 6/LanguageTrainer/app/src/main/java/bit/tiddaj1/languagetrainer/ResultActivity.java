@@ -63,4 +63,8 @@ public class ResultActivity extends AppCompatActivity {
             }
         }
     }
+
+    //Overrides method, and does nothing...
+    @Override
+    public void onBackPressed() { }
 }
