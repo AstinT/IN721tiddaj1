@@ -1,6 +1,8 @@
 package bit.tiddaj1.languagetrainer;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,7 +57,10 @@ public class ResultActivity extends AppCompatActivity {
         //onClick method
         public void onClick(View v)
         {
-            ResultActivity.this.finishAffinity();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+            {
+                ResultActivity.this.finishAffinity();
+            }
         }
     }
 }
