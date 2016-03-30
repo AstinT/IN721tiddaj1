@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -84,7 +86,8 @@ public class QuestionActivity extends AppCompatActivity {
         ImageView ivNoun = (ImageView) findViewById(R.id.ivQuestionImage);
         TextView tvTitle = (TextView) findViewById(R.id.tvQuestionNumber);
 
-        tvTitle.setText("Question " + (currQuestionNum + 1) + "/" + questionList.size());
+        String questionTitle = "Question " + (currQuestionNum + 1) + "/" + questionList.size();
+        tvTitle.setText(questionTitle);
         ivNoun.setImageResource(currQuestion.getImage());
     }
 
@@ -101,39 +104,51 @@ public class QuestionActivity extends AppCompatActivity {
 
     //Checks if the selected radiobutton is the correct answer
     //Returns a boolean
-    public boolean checkAnswer()
+    public int checkAnswer()
     {
+        int checkedRbBtnId = 0;
         RadioGroup rgArticles = (RadioGroup) findViewById(R.id.rgArticles);
-        int checkedRbBtnId = rgArticles.getCheckedRadioButtonId();
+        checkedRbBtnId = rgArticles.getCheckedRadioButtonId();
+
+        if(checkedRbBtnId == -1)
+            return -1;
+
         RadioButton checked = (RadioButton) findViewById(checkedRbBtnId);
+        checked.setChecked(false);
 
         if(checked.getText().toString().equals(currQuestion.getArticle()))
-            return true;
+            return 1;
         else
-            return false;
+            return 0;
     }
 
     //Builds a DialogFragment and passes it a string correct or incorrect depending if the question
     //was answered correctly
-    public void buildAlertBuilderFragment(boolean result)
+    public void buildAlertBuilderFragment(int result)
     {
-        feedback = new AlertBuilderFragment();
-        Bundle bundle = new Bundle();
-
-        //Puts a string into the bundle
-        if(result)
+        if (result != -1)
         {
-            bundle.putString("data", "Correct");
-            score++;
+            feedback = new AlertBuilderFragment();
+            Bundle bundle = new Bundle();
+
+            //Puts a string into the bundle
+            if(result == 1)
+            {
+                bundle.putString("data", "Correct");
+                score++;
+            }
+            else
+                bundle.putString("data", "Incorrect");
+
+            //Passes bundle
+            feedback.setArguments(bundle);
+            FragmentManager fm = getFragmentManager();
+            //Shows DialogFragment
+            feedback.show(fm, "feedback");
         }
         else
-            bundle.putString("data", "Incorrect");
-
-        //Passes bundle
-        feedback.setArguments(bundle);
-        FragmentManager fm = getFragmentManager();
-        //Shows DialogFragment
-        feedback.show(fm, "feedback");
+            Toast.makeText(getApplicationContext(), "Please select an answer.",
+                    Toast.LENGTH_SHORT).show();
     }
 
     //Called when the Next Question button on the DialogFragment is clicked
