@@ -33,7 +33,20 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonStartOver"
         android:id="@+id/btnStartOver"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quit"
+        android:id="@+id/btnQuit"
+        android:layout_alignBottom="@+id/btnStartOver"
+        android:layout_toRightOf="@+id/tvResult"
+        android:layout_toEndOf="@+id/tvResult"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="20dp" />
 </RelativeLayout>
