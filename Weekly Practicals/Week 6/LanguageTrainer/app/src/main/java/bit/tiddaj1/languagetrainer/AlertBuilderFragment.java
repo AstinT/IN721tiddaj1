@@ -15,9 +15,11 @@ public class AlertBuilderFragment extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         //gets String from the bundle
-        String title = getArguments().getString("data");
+        String title = getArguments().getString("answer");
+        String feedback = getArguments().getString("feedback");
         //sets the string as the title
         builder.setTitle(title);
+        builder.setMessage(feedback);
         builder.setPositiveButton("Next Question", new ButtonHandler());
 
         AlertDialog alert = builder.create();

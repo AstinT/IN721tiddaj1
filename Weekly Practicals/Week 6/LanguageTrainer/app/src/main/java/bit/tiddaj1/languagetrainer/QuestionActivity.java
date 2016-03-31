@@ -106,7 +106,7 @@ public class QuestionActivity extends AppCompatActivity {
     //Returns a boolean
     public int checkAnswer()
     {
-        int checkedRbBtnId = 0;
+        int checkedRbBtnId;
         RadioGroup rgArticles = (RadioGroup) findViewById(R.id.rgArticles);
         checkedRbBtnId = rgArticles.getCheckedRadioButtonId();
 
@@ -114,7 +114,8 @@ public class QuestionActivity extends AppCompatActivity {
             return -1;
 
         RadioButton checked = (RadioButton) findViewById(checkedRbBtnId);
-        checked.setChecked(false);
+        //Clears checked radio button
+        rgArticles.clearCheck();
 
         if(checked.getText().toString().equals(currQuestion.getArticle()))
             return 1;
@@ -134,11 +135,17 @@ public class QuestionActivity extends AppCompatActivity {
             //Puts a string into the bundle
             if(result == 1)
             {
-                bundle.putString("data", "Correct");
+                String feedback = "You answered correctly with " + currQuestion.getArticle() + ".";
+                bundle.putString("answer", "Correct");
+                bundle.putString("feedback", feedback);
                 score++;
             }
             else
-                bundle.putString("data", "Incorrect");
+            {
+                String feedback = "The correct answer is " + currQuestion.getArticle() + ".";
+                bundle.putString("answer", "Incorrect");
+                bundle.putString("feedback", feedback);
+            }
 
             //Passes bundle
             feedback.setArguments(bundle);
