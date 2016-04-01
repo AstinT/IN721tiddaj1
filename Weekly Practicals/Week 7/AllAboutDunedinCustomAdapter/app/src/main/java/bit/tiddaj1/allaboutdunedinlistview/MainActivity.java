@@ -11,7 +11,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
 
     //declaring a listview
-    ListView activitiesGroupListView;
+    ListView servicesGroupListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +19,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //getting listview id
-        activitiesGroupListView = (ListView) findViewById(R.id.lvActivities);
+        servicesGroupListView = (ListView) findViewById(R.id.lvServices);
 
         //setting up listview with items
-        setUpActivitiesGroupList();
+        setUpServicesGroupList();
 
         //setting onItemClickListener for listview
-        activitiesGroupListView.setOnItemClickListener(new ActivitiesGroupNavListClickHandler());
+        servicesGroupListView.setOnItemClickListener(new ActivitiesGroupNavListClickHandler());
     }
 
-    public void setUpActivitiesGroupList() {
+    public void setUpServicesGroupList() {
 
         //ListView options
         String[] groups = {"Services", "Fun Things To Do", "Dining", "Shopping"};
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> activitiesGroupAdapter = new ArrayAdapter<String>(this, R.layout.activities_group_list_item, groups);
 
         //setting adapter to listview
-        activitiesGroupListView.setAdapter(activitiesGroupAdapter);
+        servicesGroupListView.setAdapter(activitiesGroupAdapter);
     }
 
     public class ActivitiesGroupNavListClickHandler implements AdapterView.OnItemClickListener {

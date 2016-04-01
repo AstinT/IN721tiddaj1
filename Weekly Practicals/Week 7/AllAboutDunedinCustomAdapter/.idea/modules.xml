@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AllAboutDunedinListView.iml" filepath="$PROJECT_DIR$/AllAboutDunedinListView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AllAboutDunedinCustomAdapter.iml" filepath="$PROJECT_DIR$/AllAboutDunedinCustomAdapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
