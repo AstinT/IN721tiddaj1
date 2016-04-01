@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AllAboutDunedinListView</string>
+    <string name="subScreenTitleServices">Services</string>
+    <string name="subScreenTitleFunThingsToDo">Fun Things To Do</string>
+    <string name="subScreenTitleDining">Dining</string>
+    <string name="subScreenTitleShopping">Shopping</string>
+</resources>
