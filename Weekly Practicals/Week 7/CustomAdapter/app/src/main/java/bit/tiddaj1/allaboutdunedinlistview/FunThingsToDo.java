@@ -59,10 +59,9 @@ public class FunThingsToDo extends AppCompatActivity {
 
         ListView servicesGroupListView = (ListView) findViewById(R.id.lvThingsToDo);
 
-
         //Creating adapter
-        ArrayAdapter<String> activitiesGroupAdapter = new ArrayAdapter<String>(this,
-                R.layout.activities_group_list_item, thingsToDoArray);
+        ThingsToDoAdapter activitiesGroupAdapter = new ThingsToDoAdapter(this,
+                R.layout.custom_listview_item, thingsToDoArray);
 
         //setting adapter to listview
         servicesGroupListView.setAdapter(activitiesGroupAdapter);
@@ -87,7 +86,7 @@ public class FunThingsToDo extends AppCompatActivity {
 
             ThingsToDo currentItem = getItem(position);
 
-            itemImageView.setImageDrawable(currentItem.thingsToDoImage);
+            itemImageView.setImageDrawable(currentItem.getThingsToDoImage());
             itemTextView.setText(currentItem.thingsToDoName);
 
             return customView;
