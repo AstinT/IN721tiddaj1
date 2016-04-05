@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 public class FunThingsToDo extends AppCompatActivity {
 
+    //Holds all the items
     ThingsToDo[] thingsToDoArray;
 
     @Override
@@ -31,6 +32,7 @@ public class FunThingsToDo extends AppCompatActivity {
         setUpServicesGroupList();
     }
 
+    //Creates and adds all data to array
     public void initialiseDataArray()
     {
         Resources resourceMachine = getResources();
@@ -57,37 +59,44 @@ public class FunThingsToDo extends AppCompatActivity {
 
     public void setUpServicesGroupList() {
 
-        ListView servicesGroupListView = (ListView) findViewById(R.id.lvThingsToDo);
+        ListView funThingsToDoListView = (ListView) findViewById(R.id.lvThingsToDo);
 
         //Creating adapter
         ThingsToDoAdapter activitiesGroupAdapter = new ThingsToDoAdapter(this,
                 R.layout.custom_listview_item, thingsToDoArray);
 
         //setting adapter to listview
-        servicesGroupListView.setAdapter(activitiesGroupAdapter);
+        funThingsToDoListView.setAdapter(activitiesGroupAdapter);
     }
 
+    //Extending the ArrayAdapter and making a custom adapter
     public class ThingsToDoAdapter extends ArrayAdapter<ThingsToDo>
     {
         public ThingsToDoAdapter(Context context, int resource, ThingsToDo[] objects)
         {
+            //Parent constructor
             super(context, resource, objects);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup container)
         {
+            //Declare inflater
             LayoutInflater inflater = LayoutInflater.from(FunThingsToDo.this);
 
+            //Passing custom layout
             View customView = inflater.inflate(R.layout.custom_listview_item, container, false);
 
+            //Getting references
             ImageView itemImageView = (ImageView) customView.findViewById(R.id.ivItemImage);
             TextView itemTextView = (TextView) customView.findViewById(R.id.tvItemName);
 
+            //Selecting current item
             ThingsToDo currentItem = getItem(position);
 
-            itemImageView.setImageDrawable(currentItem.getThingsToDoImage());
-            itemTextView.setText(currentItem.thingsToDoName);
+            //Setting image and text
+            itemImageView.setImageDrawable(currentItem.thingsToDoImage);
+            itemTextView.setText(currentItem.toString());
 
             return customView;
         }

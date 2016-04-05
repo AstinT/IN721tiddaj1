@@ -6,12 +6,7 @@ public class ThingsToDo
 {
     //Properties
     String thingsToDoName;
-
-    public Drawable getThingsToDoImage() {
-        return thingsToDoImage;
-    }
-
-    private Drawable thingsToDoImage;
+    Drawable thingsToDoImage;
 
     //Constructor
     public ThingsToDo(String thingsToDoName, Drawable thingsToDoImage)
