@@ -81,8 +81,8 @@ public class FunThingsToDo extends AppCompatActivity {
 
             View customView = inflater.inflate(R.layout.custom_listview_item, container, false);
 
-            ImageView itemImageView = (ImageView) findViewById(R.id.ivItemImage);
-            TextView itemTextView = (TextView) findViewById(R.id.tvItemName);
+            ImageView itemImageView = (ImageView) customView.findViewById(R.id.ivItemImage);
+            TextView itemTextView = (TextView) customView.findViewById(R.id.tvItemName);
 
             ThingsToDo currentItem = getItem(position);
 
