@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             try
             {
                 JSONObject data = new JSONObject(fetchedString);
-                JSONObject artists = data.getJSONObject("artists");
+                JSONObject artists = data.getJSONObject("similarartists");
                 JSONArray artist = artists.getJSONArray("artist");
 
                 for (int i = 0; i < artist.length(); i++)
