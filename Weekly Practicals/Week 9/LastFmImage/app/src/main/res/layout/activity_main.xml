@@ -14,17 +14,15 @@
         android:layout_height="wrap_content"
         android:text="FILL LIST"
         android:id="@+id/btnFillList"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true" />
 
-    <ListView
-        android:layout_width="fill_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lvListView"
+        android:id="@+id/imageView"
         android:layout_below="@+id/btnFillList"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
 
 </RelativeLayout>

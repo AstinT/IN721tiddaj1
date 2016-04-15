@@ -1,17 +1,17 @@
 package bit.tiddaj1.lastfmwebservice;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,72 +27,38 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Artist> artistList;
+    List<String> artistList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        artistList = new ArrayList<Artist>();
-
-        AsyncAPI APIThread = new AsyncAPI();
-        APIThread.execute();
+        artistList = new ArrayList<String>();
 
         Button btnFilList = (Button) findViewById(R.id.btnFillList);
         btnFilList.setOnClickListener(new buttonFillListHandler());
     }
 
-    public void loadListView()
-    {
-        ArtistArrayAdapter artistArrayAdapter = new ArtistArrayAdapter(this,
-                R.layout.custom_listview_item, artistList);
-
-        ListView listView = (ListView) findViewById(R.id.lvListView);
-        listView.setAdapter(artistArrayAdapter);
-    }
 
     public class buttonFillListHandler implements View.OnClickListener
     {
         @Override
         public void onClick(View v)
         {
-            loadListView();
+            AsyncAPI APIThread = new AsyncAPI();
+            APIThread.execute();
         }
     }
 
-    public class ArtistArrayAdapter extends ArrayAdapter<Artist>
-    {
-        public ArtistArrayAdapter(Context context, int resource, List<Artist> objects)
-        {
-            super(context, resource, objects);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup container)
-        {
-            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-
-            View customView = inflater.inflate(R.layout.custom_listview_item, container, false);
-
-            TextView tvName = (TextView) customView.findViewById(R.id.tvName);
-            TextView tvListenerCount = (TextView) customView.findViewById(R.id.tvListnerCount);
-
-            Artist currItem = getItem(position);
-
-            tvName.setText(currItem.getName());
-            tvListenerCount.setText(currItem.getListenerCount() + "");
-
-            return customView;
-        }
-    }
-
-    public class AsyncAPI extends AsyncTask<Void, Void, String>
+    public class AsyncAPI extends AsyncTask<Void, Void, Bitmap>
     {
         @Override
-        protected String doInBackground(Void... params)
+        protected Bitmap doInBackground(Void... params)
         {
-            String JSONString = null;
+            String JSONString;
+            Bitmap bitmapImage = null;
+
             try
             {
                 String urlString = "http://ws.audioscrobbler.com/2.0/" +
@@ -121,33 +87,33 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 JSONString = stringBuilder.toString();
+
+                JSONObject data = new JSONObject(JSONString);
+                JSONObject artists = data.getJSONObject("artists");
+                JSONArray artist = artists.getJSONArray("artist");
+                JSONObject firstArtist = artist.getJSONObject(0);
+                JSONArray image = firstArtist.getJSONArray("image");
+                JSONObject imageMed = image.getJSONObject(1);
+                String imgUrl = imageMed.getString("#text");
+
+                URL URLObjectBitmap = new URL(imgUrl);
+                HttpURLConnection connectionBitmap = (HttpURLConnection) URLObjectBitmap.openConnection();
+                connectionBitmap.connect();
+                InputStream inputStreamBitmap = connectionBitmap.getInputStream();
+                bitmapImage = BitmapFactory.decodeStream(inputStreamBitmap);
             }
             catch(Exception e)
             {
                 e.printStackTrace();
             }
-            return JSONString;
+
+            return bitmapImage;
         }
 
-        protected void onPostExecute(String fetchedString)
+        protected void onPostExecute(Bitmap image)
         {
-            try
-            {
-                JSONObject data = new JSONObject(fetchedString);
-                JSONObject artists = data.getJSONObject("artists");
-                JSONArray artist = artists.getJSONArray("artist");
-
-                for (int i = 0; i < artist.length(); i++)
-                {
-                    JSONObject currJSONArtist = artist.getJSONObject(i);
-                    Artist currArtist = new Artist(currJSONArtist.getString("name"), currJSONArtist.getInt("listeners"));
-                    artistList.add(currArtist);
-                }
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
+            ImageView imageView = (ImageView) findViewById(R.id.imageView);
+            imageView.setImageBitmap(image);
         }
     }
 }
