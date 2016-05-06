@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="bit.tiddaj1.teleporterapp.MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teleport"
+        android:id="@+id/btnTeleport"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude"
+        android:id="@+id/tvLonTitle"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnTeleport"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#040303"
+        android:textSize="26sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latitude"
+        android:id="@+id/tvLatTitle"
+        android:layout_marginTop="30dp"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_below="@+id/tvLonTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvLonVal"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/tvLonTitle"
+        android:layout_toRightOf="@+id/tvLonTitle"
+        android:layout_toEndOf="@+id/tvLonTitle"
+        android:layout_marginLeft="140dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvLatVal"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/tvLatTitle"
+        android:layout_alignLeft="@+id/tvLonVal"
+        android:layout_alignStart="@+id/tvLonVal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Closet City:"
+        android:id="@+id/tvClosetCity"
+        android:layout_marginTop="30dp"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_below="@+id/tvLatTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/ivCityPic"
+        android:layout_below="@+id/tvClosetCity"
+        android:layout_toStartOf="@+id/tvLonVal"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
