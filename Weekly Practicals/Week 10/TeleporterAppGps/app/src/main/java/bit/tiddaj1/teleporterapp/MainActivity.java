@@ -1,8 +1,13 @@
 package bit.tiddaj1.teleporterapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,40 +66,37 @@ public class MainActivity extends AppCompatActivity {
         tvCityVal = (TextView) findViewById(R.id.tvCityVal);
         ivCityPic = (ImageView) findViewById(R.id.ivCityPic);
 
-        //Onclicklistener for button
-        Button btnTeleport = (Button) findViewById(R.id.btnTeleport);
-        btnTeleport.setOnClickListener(new buttonTeleportHandler());
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria defaultCri = new Criteria();
+        String provider = lm.getBestProvider(defaultCri, false);
+        lm.requestLocationUpdates(provider, 400, 1, new CustomLocationListener());
     }
 
-    //Button handler
-    public class buttonTeleportHandler implements View.OnClickListener
+    private class CustomLocationListener implements LocationListener
     {
         @Override
-        //When button clicked
-        public void onClick(View v)
+        public void onLocationChanged(Location location)
         {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
             //New AsyncAPI
             AsyncAPI APIThread = new AsyncAPI();
             //Call execute method
             APIThread.execute();
         }
-    }
 
-    //Calculates a double for a longitude or latitude
-    //Passed a bound
-    public double CalLatOrLon(int bound)
-    {
-        double result = rand.nextDouble() * bound;
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        int value = rand.nextInt(2);
-
-        if (value == 1)
-        {
-            return result * -1;
         }
-        else
-        {
-            return result;
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+
         }
     }
 
@@ -112,50 +114,36 @@ public class MainActivity extends AppCompatActivity {
     //Async class. Returns String to onPostExecute
     public class AsyncAPI extends AsyncTask<Void, Void, String>
     {
-        //Instance of ProgressDialog
-        ProgressDialog asyncProgressDialog = new ProgressDialog(MainActivity.this);
-
-        @Override
-        //Before async starts
-        protected void onPreExecute()
-        {
-            //Set message
-            asyncProgressDialog.setMessage(PD_MESSAGE);
-            //Show dialog
-            asyncProgressDialog.show();
-        }
-
         @Override
         protected String doInBackground(Void... params)
         {
-            //Set cityData with NO_RESULT
-            String cityData = NO_RESULT;
+            String cityData = "";
 
-            //While cityData equals NO_RESULT do the following....
-            while(cityData.equals(NO_RESULT))
-            {
-                //Calculate random latitude and longitude
-                latitude = CalLatOrLon(MAX_LATITUDE);
-                longitude = CalLatOrLon(MAX_LONGITUDE);
-
-                //Gets the geoplugin url
-                String geoUrlString = getGeoPluginUrl();
-
-                //Converts JSON to string
-                cityData = getJSONFromUrl(geoUrlString);
-            }
-
-            //Gets the flickr url
-            String flickrUrlString = getFlickrUrl(getCity(cityData));
+            //Gets the geoplugin url
+            String geoUrlString = getGeoPluginUrl();
 
             //Converts JSON to string
-            String flickrData = getJSONFromUrl(flickrUrlString);
+            cityData = getJSONFromUrl(geoUrlString);
 
-            //Gets img url
-            String imgUrl = getBitmapUrl(flickrData);
+            if(!cityData.equals(NO_RESULT))
+            {
+                //Gets the flickr url
+                String flickrUrlString = getFlickrUrl(getCity(cityData));
 
-            //Gets img from url
-            cityImg = getBitmap(imgUrl);
+                //Converts JSON to string
+                String flickrData = getJSONFromUrl(flickrUrlString);
+
+                //Gets img url
+                String imgUrl = getBitmapUrl(flickrData);
+
+                //Gets img from url
+                cityImg = getBitmap(imgUrl);
+            }
+            else
+            {
+                String imgUrl = "http://tourbillontrailers.co/wp-content/uploads/2016/02/no-image-found.jpg";
+                cityImg = getBitmap(imgUrl);
+            }
 
             //Returns lump data
             return cityData;
@@ -164,10 +152,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String fetchedString)
         {
-            //Closes Dialog
-            asyncProgressDialog.dismiss();
-            //Sets currCity
-            currCity = getCity(fetchedString);
+            if(!fetchedString.equals(NO_RESULT))
+            {
+                //Sets currCity
+                currCity = getCity(fetchedString);
+            }
+            else
+            {
+                currCity = "No city found";
+            }
+
             //Calls output
             Output();
         }

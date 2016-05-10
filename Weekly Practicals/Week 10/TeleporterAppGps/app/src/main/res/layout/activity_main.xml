@@ -9,22 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="bit.tiddaj1.teleporterapp.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teleport"
-        android:id="@+id/btnTeleport"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Latitude"
         android:id="@+id/tvLatTitle"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/btnTeleport"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="#040303"
