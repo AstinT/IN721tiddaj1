@@ -22,8 +22,14 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int MAX_LONGITUDE = 180;
+    //Constants
     private final int MAX_LATITUDE = 90;
+    private final int MAX_LONGITUDE = 180;
+
+    //Fields
+    private double latitude;
+    private double longitude;
+    private String currCity;
     private Random rand;
 
     @Override
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        latitude = 0;
+        longitude = 0;
         rand = new Random();
 
         Button btnTeleport = (Button) findViewById(R.id.btnTeleport);
@@ -42,14 +50,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-            double longitude = CalLonOrLat(MAX_LONGITUDE);
-            double latitude = CalLonOrLat(MAX_LATITUDE);
-
-            Output(longitude, latitude);
+            AsyncAPI APIThread = new AsyncAPI();
+            APIThread.execute();
         }
     }
 
-    public double CalLonOrLat(int bound)
+    public double CalLatOrLon(int bound)
     {
         double result = rand.nextDouble() * bound;
 
@@ -65,15 +71,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void Output(double longitude, double latitude)
+    public void Output()
     {
         DecimalFormat df = new DecimalFormat("#.###");
+
+        TextView tvLat = (TextView) findViewById(R.id.tvLatVal);
+        tvLat.setText(df.format(latitude));
 
         TextView tvLon = (TextView) findViewById(R.id.tvLonVal);
         tvLon.setText(df.format(longitude));
 
-        TextView tvLat = (TextView) findViewById(R.id.tvLatVal);
-        tvLat.setText(df.format(latitude));
+        TextView tvCityVal = (TextView) findViewById(R.id.tvCityVal);
+        tvCityVal.setText(currCity);
     }
 
     public class AsyncAPI extends AsyncTask<Void, Void, String>
@@ -81,41 +90,80 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params)
         {
-            String JSONString = null;
-            try
+            String cityData = "[[]]";
+
+            while(cityData.equals("[[]]"))
             {
-                String urlString = "";
+                latitude = CalLatOrLon(MAX_LATITUDE);
+                longitude = CalLatOrLon(MAX_LONGITUDE);
 
-                URL URLObject = new URL(urlString);
+                String urlString = "http://www.geoplugin.net/extras/location.gp" +
+                        "?lat=" + latitude +
+                        "&long=" + longitude +
+                        "&format=json";
 
-                HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
-
-                connection.connect();
-
-                int responseCode = connection.getResponseCode();
-
-                InputStream inputStream = connection.getInputStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                String responseString;
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((responseString = bufferedReader.readLine()) != null)
-                {
-                    stringBuilder = stringBuilder.append(responseString);
-                }
-
-                JSONString = stringBuilder.toString();
+                cityData = getJSONFromUrl(urlString);
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            return JSONString;
+
+            return cityData;
         }
 
         protected void onPostExecute(String fetchedString)
         {
+            currCity = getCity(fetchedString);
+            Output();
         }
+    }
+
+    public String getJSONFromUrl(String urlString)
+    {
+        String JSONData = null;
+
+        try
+        {
+            URL URLObject = new URL(urlString);
+
+            HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
+
+            connection.connect();
+
+            //int responseCode = connection.getResponseCode();
+
+            InputStream inputStream = connection.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            String responseString;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((responseString = bufferedReader.readLine()) != null)
+            {
+                stringBuilder = stringBuilder.append(responseString);
+            }
+
+            JSONData = stringBuilder.toString();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return JSONData;
+    }
+
+    public String getCity(String fetchedString)
+    {
+        String cityName = "";
+
+        try
+        {
+            JSONObject data = new JSONObject(fetchedString);
+            cityName = data.getString("geoplugin_place");
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return cityName;
     }
 }

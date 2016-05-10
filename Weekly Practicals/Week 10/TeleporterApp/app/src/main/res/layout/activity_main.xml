@@ -21,8 +21,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Longitude"
-        android:id="@+id/tvLonTitle"
+        android:text="Latitude"
+        android:id="@+id/tvLatTitle"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/btnTeleport"
         android:layout_alignParentLeft="true"
@@ -33,37 +33,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Latitude"
-        android:id="@+id/tvLatTitle"
+        android:text="Longitude"
+        android:id="@+id/tvLonTitle"
         android:layout_marginTop="30dp"
         android:textColor="#040303"
         android:textSize="26sp"
-        android:layout_below="@+id/tvLonTitle"
+        android:layout_below="@+id/tvLatTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvLonVal"
-        android:textColor="#040303"
-        android:textSize="26sp"
-        android:layout_alignTop="@+id/tvLonTitle"
-        android:layout_toRightOf="@+id/tvLonTitle"
-        android:layout_toEndOf="@+id/tvLonTitle"
-        android:layout_marginLeft="140dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginRight="100dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvLatVal"
-        android:textColor="#040303"
-        android:textSize="26sp"
-        android:layout_alignTop="@+id/tvLatTitle"
-        android:layout_alignLeft="@+id/tvLonVal"
-        android:layout_alignStart="@+id/tvLonVal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,7 +50,7 @@
         android:layout_marginTop="30dp"
         android:textColor="#040303"
         android:textSize="26sp"
-        android:layout_below="@+id/tvLatTitle"
+        android:layout_below="@+id/tvLonTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -82,9 +59,41 @@
         android:layout_height="fill_parent"
         android:id="@+id/ivCityPic"
         android:layout_below="@+id/tvClosetCity"
-        android:layout_toStartOf="@+id/tvLonVal"
         android:layout_marginTop="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/tvLonVal"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/tvLatTitle"
+        android:layout_toRightOf="@+id/tvLatTitle"
+        android:layout_toEndOf="@+id/tvLatTitle"
+        android:layout_marginLeft="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/tvLatVal"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/tvLonTitle"
+        android:layout_alignLeft="@+id/tvLonVal"
+        android:layout_alignStart="@+id/tvLonVal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCityVal"
+        android:textColor="#040303"
+        android:textSize="26sp"
+        android:layout_above="@+id/ivCityPic"
+        android:layout_alignLeft="@+id/tvLatVal"
+        android:layout_alignStart="@+id/tvLatVal" />
 
 </RelativeLayout>
