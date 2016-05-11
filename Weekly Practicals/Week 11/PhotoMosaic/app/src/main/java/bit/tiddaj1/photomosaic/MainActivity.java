@@ -15,12 +15,14 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
 {
-    private File imgFile;
-    private Bitmap img;
+    //Fields
+    File imgFile;
+    ArrayList<ImageView> imageViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,19 +30,48 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imgFile = null;
+        LoadImageViewList();
 
+        //Sets  OnClickListener
         Button btnCamera = (Button) findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(new CameraButtonHandler());
     }
 
+    //Loads array list with all image views
+    public void LoadImageViewList()
+    {
+        //new array list
+        imageViews = new ArrayList<>();
+
+        //Get reference to all image views
+        ImageView ivOne = (ImageView) findViewById(R.id.ivOne);
+        ImageView ivTwo = (ImageView) findViewById(R.id.ivTwo);
+        ImageView ivThree = (ImageView) findViewById(R.id.ivThree);
+        ImageView ivFour = (ImageView) findViewById(R.id.ivFour);
+
+        //Adds them to the list
+        imageViews.add(ivOne);
+        imageViews.add(ivTwo);
+        imageViews.add(ivThree);
+        imageViews.add(ivFour);
+    }
+
+    //Loads all image views with the same bitmap
+    public void LoadBitmapToImageviews(Bitmap img)
+    {
+        for ( ImageView iv : imageViews )
+        {
+            iv.setImageBitmap(img);
+        }
+    }
+
+    //OnClickListener
     public class CameraButtonHandler implements View.OnClickListener
     {
         @Override
         public void onClick(View v)
         {
-            imgFile = CreateUniqueFile();
-            StartCameraApp(imgFile);
+            StartCameraApp();
         }
     }
 
@@ -51,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         File imageRootPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
         //Make subdirectory
-        File imgStroageDir = new File(imageRootPath, "PhotoMosaic");
+        File imgStroageDir = new File(imageRootPath, "CameraDemo1");
         if (!imgStroageDir.exists())
         {
             imgStroageDir.mkdirs(); //mkdirs creates parent directories as required
@@ -63,41 +94,50 @@ public class MainActivity extends AppCompatActivity
         String timeStamp = timeStampFormat.format(currentTime);
 
         //Make file name
-        String imgFileName = "IMG_" + timeStamp + ".jpg";
+        String imgName = "IMG_" + timeStamp + ".jpg";
 
         //Make file object from directory and file name
-        File file = new File(imgStroageDir.getPath() + File.separator + imgFileName);
-
-        //Return file
-        return file;
+        //Return it
+        return new File(imgStroageDir.getPath() + File.separator + imgName);
     }
 
     //Passed in a time stamped file to hold image
-    public void StartCameraApp(File imgFile)
+    public void StartCameraApp()
     {
+        //Creating file
+        imgFile = CreateUniqueFile();
+
         //Generate Uri from passed in file
         Uri imgFileUri = Uri.fromFile(imgFile);
 
+        //Create an intent for the image capture content provider
         Intent imageCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+        //Attach your uri to the intent
         imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgFileUri);
 
+        //Launch the intent
         startActivityForResult(imageCaptureIntent, 1);
     }
 
+    //Callback method
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        //Request code set when we launched intent
         if (requestCode == 1)
         {
+            //Checking if success
             if (resultCode == RESULT_OK)
             {
+                //File path to img
                 String realFilePath = imgFile.getPath();
 
-                img = BitmapFactory.decodeFile(realFilePath);
+                //Makes bitmap
+                Bitmap img = BitmapFactory.decodeFile(realFilePath);
 
-                ImageView iv = (ImageView) findViewById(R.id.ivOne);
-                iv.setImageBitmap(img);
+                //Passes bitmap to the image views to be set
+                LoadBitmapToImageviews(img);
             }
         }
         else
