@@ -35,6 +35,18 @@ public class MainActivity extends AppCompatActivity
         //Sets  OnClickListener
         Button btnCamera = (Button) findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(new CameraButtonHandler());
+
+        //Restore imageFile if available
+        if (savedInstanceState != null) {
+            imgFile = (File) savedInstanceState.get("imageFile");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceData) {
+        super.onSaveInstanceState(savedInstanceData);
+        //Save imageFile
+        savedInstanceData.putSerializable("imageFile", imgFile);
     }
 
     //Loads array list with all image views
