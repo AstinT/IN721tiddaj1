@@ -37,13 +37,15 @@ public class MainActivity extends AppCompatActivity
         btnCamera.setOnClickListener(new CameraButtonHandler());
 
         //Restore imageFile if available
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null)
+        {
             imgFile = (File) savedInstanceState.get("imageFile");
         }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle savedInstanceData) {
+    protected void onSaveInstanceState(Bundle savedInstanceData)
+    {
         super.onSaveInstanceState(savedInstanceData);
         //Save imageFile
         savedInstanceData.putSerializable("imageFile", imgFile);
