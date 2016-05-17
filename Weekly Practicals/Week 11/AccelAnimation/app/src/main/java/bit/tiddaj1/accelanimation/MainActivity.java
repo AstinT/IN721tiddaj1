@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity
             ivSmiley.setX(ivSmiley.getX() + VELOCITY);
         }
 
-        //y is greater than 0, move image to down
+        //y is greater than 0, move image down
         if (y > 0)
         {
             ivSmiley.setY(ivSmiley.getY() + VELOCITY);
         }
-        //y is less than 0, move image to up
+        //y is less than 0, move image up
         else
         {
             ivSmiley.setY(ivSmiley.getY() - VELOCITY);
