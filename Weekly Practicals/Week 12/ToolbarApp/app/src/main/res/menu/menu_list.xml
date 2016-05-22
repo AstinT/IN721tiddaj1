@@ -3,23 +3,30 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item1"
-        android:icon="@drawable/"
-        android:title=""
+        android:id="@+id/itemUp"
+        android:icon="@drawable/ic_keyboard_arrow_up"
+        android:title="Up"
         app:showAsAction="ifRoom|withText">
     </item>
 
     <item
-        android:id="@+id/item2"
-        android:icon="@drawable/"
-        android:title=""
+        android:id="@+id/itemDown"
+        android:icon="@drawable/ic_keyboard_arrow_down"
+        android:title="Down"
         app:showAsAction="ifRoom|withText">
     </item>
 
     <item
-        android:id="@+id/item3"
-        android:icon="@drawable/"
-        android:title=""
+        android:id="@+id/itemLeft"
+        android:icon="@drawable/ic_keyboard_arrow_left"
+        android:title="Left"
+        app:showAsAction="ifRoom|withText">
+    </item>
+
+    <item
+        android:id="@+id/itemRight"
+        android:icon="@drawable/ic_keyboard_arrow_right"
+        android:title="Right"
         app:showAsAction="ifRoom|withText">
     </item>
 
