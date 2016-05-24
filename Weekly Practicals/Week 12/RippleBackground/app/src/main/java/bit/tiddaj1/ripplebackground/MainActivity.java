@@ -3,6 +3,7 @@ package bit.tiddaj1.ripplebackground;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.skyfishjy.library.RippleBackground;
@@ -23,20 +24,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Reference to ripplebackground container
         rippleBackground = (RippleBackground)findViewById(R.id.content);
-        //Reference to the image view
-        ImageView imageView = (ImageView)findViewById(R.id.centerImage);
 
-        //Set onclick listener
-        imageView.setOnClickListener(new RippleHandler());
+        //Reference to button
+        Button btnRipple = (Button) findViewById(R.id.btnRipple);
+        //Setting onClickListener
+        btnRipple.setOnClickListener(new buttonClickHandler());
     }
 
-    public class RippleHandler implements View.OnClickListener
+    public class buttonClickHandler implements View.OnClickListener
     {
         @Override
         public void onClick(View v)
         {
             //if not running, start animation
-            if(running == false)
+            if(!running)
             {
                 rippleBackground.startRippleAnimation();
                 running = true;
